@@ -103,10 +103,10 @@ abstract class Edge extends BaseInstruction
     {
         $margin = str_repeat($spaces, $indent);
 
-        $that = $this; // Fix for PHP 5.3
-        $edges = array_map(function ($edge) use ($that) {
-            return $that->escape($edge);
-        }, $this->list);
+        $edges = array();
+        foreach ($this->list as $edge) {
+            $edges[] = $this->escape($edge);
+        }
 
         $edge = implode($this->getOperator(), $edges);
 
