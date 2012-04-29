@@ -1,0 +1,21 @@
+{
+  "name": "alom/graphviz",
+  "description": "Graphviz generation for PHP",
+  "keywords": ["dot","graphviz"],
+  "homepage": "http://github.com/alexandresalome/graphviz",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alexandre Salomé",
+      "email": "alexandre.salome@gmail.com",
+      "homepage": "http://alexandre-salome.fr"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0"
+  },
+  "autoload": {
+    "psr-0": {"Alom": "src/"}
+  }
+}
