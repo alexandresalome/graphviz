@@ -1,6 +1,8 @@
 Alom Graphviz - Graphviz generation for PHP
 ===========================================
 
+[![Build Status](https://secure.travis-ci.org/alexandresalome/graphviz.png?branch=master)](http://travis-ci.org/alexandresalome/graphviz)
+
 Usage
 -----
 
