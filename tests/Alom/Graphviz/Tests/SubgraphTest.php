@@ -22,5 +22,7 @@ class SubgraphTest extends \PHPUnit_Framework_TestCase
         $subgraph->edge(array('A', 'B', 'C'));
 
         $subgraph->render();
+
+        $this->markTestIncomplete('This test has not been fully implemented yet.');
     }
 }

@@ -15,7 +15,7 @@ class DirectedEdgeTest extends \PHPUnit_Framework_TestCase
 {
     public function testStructure()
     {
-        $mock = $this->getMock('Alom\Graphviz\InstructionInterface');
+        $mock = $this->getMock('Alom\Graphviz\BaseInstruction');
         $edge = new DirectedEdge(array('A', 'B'), array(), $mock);
 
         $this->assertCount(2, $edge->getList(), "2 elements in the edge");

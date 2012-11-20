@@ -19,7 +19,7 @@ class Digraph extends Graph
     /**
      * @inheritdoc
      */
-    protected function createEdge($list, array $attributes = array(), $parent = null)
+    protected function createEdge($list, array $attributes = array(), BaseInstruction $parent = null)
     {
         return new DirectedEdge($list, $attributes, $parent);
     }
@@ -29,6 +29,6 @@ class Digraph extends Graph
      */
     protected function getHeader($id)
     {
-        return 'digraph '.$id;
+        return 'digraph ' . $id;
     }
 }

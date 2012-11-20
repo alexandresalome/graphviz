@@ -7,9 +7,10 @@
  * file that was distributed with this source code.
  */
 
-require_once __DIR__.'/../vendor/.composer/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $graph = new Alom\Graphviz\Digraph('G');
+
 $graph
     ->subgraph('cluster_1')
         ->attr('node', array('style' => 'filled', 'fillcolor' => 'blue'))

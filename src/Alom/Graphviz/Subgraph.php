@@ -19,18 +19,18 @@ class Subgraph extends Graph
     /**
      * @inheritdoc
      */
-    protected function createEdge($list, array $attributes = array(), $parent = null)
+    protected function createEdge($list, array $attributes = array(), Graph $parent = null)
     {
         $currentParent = $parent;
-    	while ($currentParent !== null) {
-    		if ($currentParent instanceof Digraph) {
-		        return new DirectedEdge($list, $attributes, $parent);
-    		}
+        while ($currentParent !== null) {
+            if ($currentParent instanceof Digraph) {
+                return new DirectedEdge($list, $attributes, $parent);
+            }
 
-    		$currentParent = $parent->end();
-    	}
+            $currentParent = $parent->end();
+        }
 
-    	throw new \LogicException('Unable to find edge type');
+        throw new \LogicException('Unable to find edge type');
     }
 
     /**
@@ -38,6 +38,6 @@ class Subgraph extends Graph
      */
     protected function getHeader($id)
     {
-        return 'subgraph '.$id;
+        return 'subgraph ' . $id;
     }
 }

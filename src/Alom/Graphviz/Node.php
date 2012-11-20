@@ -16,35 +16,21 @@ namespace Alom\Graphviz;
  */
 class Node extends BaseInstruction
 {
-    /**
-     * Parent instruction.
-     *
-     * @var InstructionInterface
-     */
+    /** @var Graph Parent instruction. */
     protected $parent;
 
-    /**
-     * Identifier of the node.
-     *
-     * @var string
-     */
+    /** @var string Identifier of the node. */
     protected $id;
 
-    /**
-     * Attributes of the node.
-     *
-     * @var AttributeBag
-     */
+    /** @var AttributeBag Attributes of the node. */
     protected $attributes;
 
     /**
      * Creates a new node.
      *
-     * @param string $id Identifier of the node
-     *
-     * @param array $attributes Attributes to set on node
-     *
-     * @param InstructionInterface Parent instruction
+     * @param string $id         Identifier of the node
+     * @param array  $attributes Attributes to set on node
+     * @param Graph  $parent     Parent instruction
      */
     public function __construct($id, array $attributes = array(), $parent = null)
     {
@@ -76,9 +62,10 @@ class Node extends BaseInstruction
     /**
      * Sets an attribute of node.
      *
-     * @param string $name Name of the attribute to set
-     *
+     * @param string $name  Name of the attribute to set
      * @param string $value Value to set
+     *
+     * @return \Alom\Graphviz\Node
      */
     public function attribute($name, $value)
     {
@@ -88,9 +75,9 @@ class Node extends BaseInstruction
     }
 
     /**
-     * Fluid-interface method.
+     * Fluid interface method.
      *
-     * @return InstructionInterface
+     * @return Graph
      */
     public function end()
     {
@@ -102,9 +89,8 @@ class Node extends BaseInstruction
      */
     public function render($indent = 0, $spaces = self::DEFAULT_INDENT)
     {
-        $margin = str_repeat($spaces, $indent);
         $attributes = $this->attributes->render($indent + 1, $spaces);
 
-        return sprintf("%s%s%s;\n", $margin, $this->escape($this->id), $attributes ? ' '.$attributes : $attributes);
+        return str_repeat($spaces, $indent) . $this->escape($this->id) . ($attributes ? ' ' . $attributes : '') . ";\n";
     }
 }

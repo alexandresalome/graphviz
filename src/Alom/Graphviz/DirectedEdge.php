@@ -19,8 +19,8 @@ class DirectedEdge extends Edge
     /**
      * @inheritdoc
      */
-	protected function getOperator()
-	{
-		return ' -> ';
-	}
+    protected function getOperator()
+    {
+        return ' -> ';
+    }
 }
