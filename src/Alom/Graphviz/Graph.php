@@ -16,46 +16,28 @@ namespace Alom\Graphviz;
  */
 abstract class Graph extends BaseInstruction
 {
-    /**
-     * Parent node
-     *
-     * @var InstructionInterface
-     */
+    /** @var BaseInstruction Parent node */
     protected $parent;
 
-    /**
-     * Graph identifier
-     *
-     * @var string
-     */
+    /** @var string Graph identifier */
     protected $id;
 
-    /**
-     * Name of the graph
-     *
-     * @var string
-     */
+    /** @var string Name of the graph */
     protected $name;
 
-    /**
-     * Instructions list
-     *
-     * @var array
-     */
+    /** @var BaseInstruction[] Instructions list */
     protected $instructions = array();
 
     /**
      * Creates a new edge for the graph.
      *
-     * @param array $list List of elements of the edge
-     *
-     * @param array $attributes Associative array of attributes
-     *
-     * @param InstructionInterface Parent element
+     * @param array           $list       List of elements of the edge
+     * @param array           $attributes Associative array of attributes
+     * @param BaseInstruction $parent     Parent element
      *
      * @return Edge The created edge
      */
-    abstract protected function createEdge($list, array $attributes = array(), $parent = null);
+    abstract protected function createEdge($list, array $attributes = array(), BaseInstruction $parent = null);
 
     /**
      * Returns the graph header (digraph G as example).
@@ -69,9 +51,8 @@ abstract class Graph extends BaseInstruction
     /**
      * Creates a new graph.
      *
-     * @param string $id Identifier of the graph
-     *
-     * @param InstructionInterface $parent Parent element
+     * @param string          $id     Identifier of the graph
+     * @param BaseInstruction $parent Parent element
      */
     public function __construct($id, $parent = null)
     {
@@ -80,7 +61,7 @@ abstract class Graph extends BaseInstruction
     }
 
     /**
-     * Returns identfier of graph.
+     * Returns identifier of graph.
      *
      * @return string
      */
@@ -92,7 +73,7 @@ abstract class Graph extends BaseInstruction
     /**
      * Adds a new instruction to graph.
      *
-     * @param InstructionInterface $instruction Instruction to add
+     * @param BaseInstruction $instruction Instruction to add
      *
      * @return Graph Fluid-interface
      */
@@ -116,10 +97,10 @@ abstract class Graph extends BaseInstruction
     /**
      * Adds an assignment instruction.
      *
-     * @param string $name Name of the value to assign
-     *
+     * @param string $name  Name of the value to assign
      * @param string $value Value to assign
      *
+     * @throws \InvalidArgumentException
      * @return Graph Fluid-interface
      */
     public function set($name, $value)
@@ -136,9 +117,10 @@ abstract class Graph extends BaseInstruction
     /**
      * Define attributes for node/edge/graph.
      *
-     * @param string $name Name of type
+     * @param string $name       Name of type
+     * @param array  $attributes Attributes of the type
      *
-     * @param array $attributes Attributes of the type
+     * @return \Alom\Graphviz\Graph
      */
     public function attr($name, array $attributes)
     {
@@ -156,17 +138,14 @@ abstract class Graph extends BaseInstruction
      */
     public function subgraph($id)
     {
-        $instruction = $this->instructions[] = new Subgraph($id, $this);
-
-        return $instruction;
+        return $this->instructions[] = new Subgraph($id, $this);
     }
 
     /**
      * Created a new node on graph.
      *
-     * @param string $id Identifier of node
-     *
-     * @param array $attributes Attributes to set on node
+     * @param string $id         Identifier of node
+     * @param array  $attributes Attributes to set on node
      *
      * @return Graph Fluid-interface
      */
@@ -180,24 +159,20 @@ abstract class Graph extends BaseInstruction
     /**
      * Created a new node on graph.
      *
-     * @param string $id Identifier of node
-     *
-     * @param array $attributes Attributes to set on node
+     * @param string $id         Identifier of node
+     * @param array  $attributes Attributes to set on node
      *
      * @return Node
      */
     public function beginNode($id, array $attributes = array())
     {
-        $instruction = $this->instructions[] = new Node($id, $attributes, $this);
-
-        return $instruction;
+        return $this->instructions[] = new Node($id, $attributes, $this);
     }
 
     /**
      * Created a new edge on graph.
      *
-     * @param array $list List of edges
-     *
+     * @param array $list       List of edges
      * @param array $attributes Attributes to set on edge
      *
      * @return Graph Fluid-interface
@@ -212,17 +187,14 @@ abstract class Graph extends BaseInstruction
     /**
      * Created a new edge on graph.
      *
-     * @param array $list List of edges
-     *
+     * @param array $list       List of edges
      * @param array $attributes Attributes to set on edge
      *
      * @return Edge
      */
     public function beginEdge($list, array $attributes = array())
     {
-        $instruction = $this->instructions[] = $this->createEdge($list, $attributes, $this);
-
-        return $instruction;
+        return $this->instructions[] = $this->createEdge($list, $attributes, $this);
     }
 
     /**
@@ -241,11 +213,11 @@ abstract class Graph extends BaseInstruction
     public function render($indent = 0, $spaces = self::DEFAULT_INDENT)
     {
         $margin = str_repeat($spaces, $indent);
-        $result = $margin.$this->getHeader($this->id).' {'."\n";
+        $result = $margin . $this->getHeader($this->id) . ' {' . "\n";
         foreach ($this->instructions as $instruction) {
             $result .= $instruction->render($indent + 1, $spaces);
         }
-        $result .= $margin.'};'."\n";
+        $result .= $margin . '};' . "\n";
 
         return $result;
     }

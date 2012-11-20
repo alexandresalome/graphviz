@@ -16,37 +16,28 @@ namespace Alom\Graphviz;
  */
 class Assign extends BaseInstruction
 {
-    /**
-     * Name of the attribute
-     *
-     * @var string
-     */
-	protected $name;
+    /** @var string Name of the attribute */
+    protected $name;
 
-    /**
-     * Value of the assignment
-     *
-     * @var string
-     */
-	protected $value;
+    /** @var string Value of the assignment */
+    protected $value;
 
     /**
      * Creates a new assignment
      *
-     * @param string $name Name of the attribute to set
-     *
+     * @param string $name  Name of the attribute to set
      * @param string $value Value of the attribute
      */
-	public function __construct($name, $value = null)
-	{
-		$this->name = $name;
-		$this->value = $value;
-	}
+    public function __construct($name, $value = NULL)
+    {
+        $this->name = $name;
+        $this->value = $value;
+    }
 
     /**
      * Returns the name of assignment.
      *
-     * @return string the assignement name
+     * @return string The assignment name
      */
     public function getName()
     {
@@ -56,7 +47,7 @@ class Assign extends BaseInstruction
     /**
      * Returns the value of assignment.
      *
-     * @return string the assignement value
+     * @return string the assignment value
      */
     public function getValue()
     {
@@ -80,10 +71,8 @@ class Assign extends BaseInstruction
     /**
      * @inheritdoc
      */
-	public function render($indent = 0, $spaces = self::DEFAULT_INDENT)
-	{
-        $spaces = str_repeat($spaces, $indent);
-
-		return sprintf("%s%s;\n", $spaces, $this->renderInlineAssignment($this->name, $this->value));
-	}
+    public function render($indent = 0, $spaces = self::DEFAULT_INDENT)
+    {
+        return str_repeat($spaces, $indent) . $this->renderInlineAssignment($this->name, $this->value) . ";\n";
+    }
 }

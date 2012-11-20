@@ -16,25 +16,13 @@ namespace Alom\Graphviz;
  */
 abstract class Edge extends BaseInstruction
 {
-    /**
-     * List of elements
-     *
-     * @var array
-     */
+    /** @var array List of elements */
     protected $list;
 
-    /**
-     * Attributes of the edge
-     *
-     * @var AttributeBag
-     */
+    /** @var AttributeBag Attributes of the edge */
     protected $attributes;
 
-    /**
-     * Parent instruction
-     *
-     * @var InstructionInterface
-     */
+    /** @var BaseInstruction Parent instruction */
     protected $parent;
 
     /**
@@ -47,13 +35,11 @@ abstract class Edge extends BaseInstruction
     /**
      * Creates an edge.
      *
-     * @param array $list List of edges
-     *
-     * @param array $attributes Associative array of attributes
-     *
-     * @param InstructionInterface $parent Parent instruction
+     * @param array           $list       List of edges
+     * @param array           $attributes Associative array of attributes
+     * @param BaseInstruction $parent     Parent instruction
      */
-    public function __construct(array $list, array $attributes = array(), InstructionInterface $parent = null)
+    public function __construct(array $list, array $attributes = array(), BaseInstruction $parent = NULL)
     {
         $this->list = $list;
         $this->attributes = new AttributeBag($attributes);
@@ -73,8 +59,7 @@ abstract class Edge extends BaseInstruction
     /**
      * Sets an attribute.
      *
-     * @param string $name Name of the attribute to set
-     *
+     * @param string $name  Name of the attribute to set
      * @param string $value Value of the attribute to set
      *
      * @return Edge Fluid-interface
@@ -101,8 +86,6 @@ abstract class Edge extends BaseInstruction
      */
     public function render($indent = 0, $spaces = self::DEFAULT_INDENT)
     {
-        $margin = str_repeat($spaces, $indent);
-
         $edges = array();
         foreach ($this->list as $edge) {
             $edges[] = $this->escape($edge);
@@ -111,13 +94,14 @@ abstract class Edge extends BaseInstruction
         $edge = implode($this->getOperator(), $edges);
 
         $attributes = $this->attributes->render($indent + 1);
-        return sprintf("%s%s%s;\n", $margin, $edge, $attributes ? ' '.$attributes : $attributes);
+
+        return str_repeat($spaces, $indent) . $edge . ($attributes ? ' ' . $attributes : $attributes) . ";\n";
     }
 
     /**
      * End function for fluid-interface.
      *
-     * @return InstructionInterface|null The parent or null
+     * @return BaseInstruction|null The parent or null
      */
     public function end()
     {

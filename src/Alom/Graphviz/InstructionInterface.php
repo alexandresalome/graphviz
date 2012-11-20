@@ -21,7 +21,8 @@ interface InstructionInterface
     /**
      * Renders the assign statement.
      *
-     * @param int $indent Current level of indentation
+     * @param int    $indent Current level of indentation
+     * @param string $spaces
      *
      * @return string The rendered line
      */

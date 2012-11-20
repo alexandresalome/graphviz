@@ -21,13 +21,14 @@ abstract class BaseInstruction implements InstructionInterface
      *
      * It will handle escaping, according to the value.
      *
-     * @param string $name A name
-     *
+     * @param string $name  A name
      * @param string $value A value
+     *
+     * @return string
      */
     protected function renderInlineAssignment($name, $value)
     {
-        return sprintf('%s=%s', $this->escape($name), $this->escape($value));
+        return $this->escape($name) . '=' . $this->escape($value);
     }
 
     /**
@@ -39,15 +40,13 @@ abstract class BaseInstruction implements InstructionInterface
      */
     protected function escape($value)
     {
-        if ($this->needsEscaping($value)) {
-            return '"'.str_replace('"', '""', $value).'"';
-        } else {
-            return $value;
-        }
+        return ($this->needsEscaping($value)) ? '"' . str_replace('"', '""', $value) . '"' : $value;
     }
 
     /**
      * Tests if a string needs escaping.
+     *
+     * @param string $value
      *
      * @return boolean Result of test
      */
