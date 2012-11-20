@@ -16,11 +16,7 @@ namespace Alom\Graphviz;
  */
 class AttributeBag extends BaseInstruction
 {
-    /**
-     * Associative array of attributes. The key is the name.
-     *
-     * @var array
-     */
+    /** @var array Associative array of attributes. The key is the name. */
     protected $attributes;
 
     /**
@@ -36,11 +32,10 @@ class AttributeBag extends BaseInstruction
     /**
      * Changes the value of an attribute.
      *
-     * @param string $name Attribute's name
-     *
+     * @param string $name  The name for the attribute
      * @param string $value Value to set
      *
-     * @return AttributeBag Fluid-interface
+     * @return AttributeBag Fluid interface
      */
     public function set($name, $value)
     {
@@ -52,8 +47,7 @@ class AttributeBag extends BaseInstruction
     /**
      * Returns the value of an attribute.
      *
-     * @param string $name Attribute's name
-     *
+     * @param string $name    The name for the attribute
      * @param string $default Default value if attribute is not set.
      *
      * @return string|mixed The attribute value
@@ -66,7 +60,7 @@ class AttributeBag extends BaseInstruction
     /**
      * Tests if the bag has an attribute.
      *
-     * @param string Attribute's name to check
+     * @param string $name The attribute name to check
      *
      * @return boolean Result of the test
      */
@@ -89,6 +83,6 @@ class AttributeBag extends BaseInstruction
             $exp[] = $this->renderInlineAssignment($name, $value);
         }
 
-        return '['.implode(", ", $exp).']';
+        return '[' . implode(', ', $exp) . ']';
     }
 }
