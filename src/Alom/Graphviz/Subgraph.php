@@ -19,7 +19,7 @@ class Subgraph extends Graph
     /**
      * @inheritdoc
      */
-    protected function createEdge($list, array $attributes = array(), Graph $parent = null)
+    protected function createEdge($list, array $attributes = array(), BaseInstruction $parent = null)
     {
         $currentParent = $parent;
         while ($currentParent !== null) {
