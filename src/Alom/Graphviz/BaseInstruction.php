@@ -43,6 +43,16 @@ abstract class BaseInstruction implements InstructionInterface
         return ($this->needsEscaping($value)) ? '"' . str_replace('"', '""', $value) . '"' : $value;
     }
 
+    protected function escapePath(array $path)
+    {
+        $list = array();
+        foreach ($path as $element) {
+            $list[] = $this->escape($element);
+        }
+
+        return implode(':', $list);
+    }
+
     /**
      * Tests if a string needs escaping.
      *
