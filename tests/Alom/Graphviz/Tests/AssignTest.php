@@ -38,6 +38,9 @@ class AssignTest extends \PHPUnit_Framework_TestCase
         $assign = new Assign('foo', '#bar');
         $this->assertEquals("foo=\"#bar\";\n", $assign->render(), "Escaping");
 
+        $assign = new Assign('foo', 'a-b');
+        $this->assertEquals("foo=\"a-b\";\n", $assign->render(), "Escaping hyphens");
+
         $assign = new Assign('foo', 'bar');
         $this->assertEquals("foo=bar;\n", $assign->render(), "Render method with simple strings");
         $this->assertEquals("    foo=bar;\n", $assign->render(1), "Render method with indent");

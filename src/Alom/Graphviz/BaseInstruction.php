@@ -62,6 +62,6 @@ abstract class BaseInstruction implements InstructionInterface
      */
     protected function needsEscaping($value)
     {
-        return preg_match('/[ "#:\\/\\.,]/', $value) || in_array($value, array('graph', 'node', 'edge')) || empty($value);
+        return preg_match('/[ "#-:\\/\\.,]/', $value) || in_array($value, array('graph', 'node', 'edge')) || empty($value);
     }
 }
