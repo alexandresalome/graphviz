@@ -40,7 +40,7 @@ abstract class BaseInstruction implements InstructionInterface
      */
     protected function escape($value)
     {
-        return ($this->needsEscaping($value)) ? '"' . str_replace('"', '""', $value) . '"' : $value;
+        return ($this->needsEscaping($value)) ? '"' . str_replace('"', '""', str_replace('\\', '\\\\', $value)) . '"' : $value;
     }
 
     protected function escapePath(array $path)
@@ -62,6 +62,6 @@ abstract class BaseInstruction implements InstructionInterface
      */
     protected function needsEscaping($value)
     {
-        return preg_match('/[ "#-:\\/\\.,]/', $value) || in_array($value, array('graph', 'node', 'edge')) || empty($value);
+        return preg_match('/[ "#-:\\\\\\/\\.,]/', $value) || in_array($value, array('graph', 'node', 'edge')) || empty($value);
     }
 }
