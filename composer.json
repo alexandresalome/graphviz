@@ -22,5 +22,10 @@
     "psr-0": {
       "Alom": "src/"
     }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
   }
 }
