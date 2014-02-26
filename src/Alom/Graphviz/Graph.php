@@ -217,7 +217,7 @@ abstract class Graph extends BaseInstruction
         foreach ($this->instructions as $instruction) {
             $result .= $instruction->render($indent + 1, $spaces);
         }
-        $result .= $margin . '};' . "\n";
+        $result .= $margin . '}' . "\n";
 
         return $result;
     }
