@@ -22,9 +22,9 @@ class DigraphTest extends \PHPUnit_Framework_TestCase
     {
         $graph = new Digraph('G');
 
-        $this->assertEquals("digraph G {\n};\n", $graph->render(), "Render empty graph");
-        $this->assertEquals("    digraph G {\n    };\n", $graph->render(1), "Render empty graph with indent");
-        $this->assertEquals("  digraph G {\n  };\n", $graph->render(1, "  "), "Render empty graph with indent and spaces");
+        $this->assertEquals("digraph G {\n}\n", $graph->render(), "Render empty graph");
+        $this->assertEquals("    digraph G {\n    }\n", $graph->render(1), "Render empty graph with indent");
+        $this->assertEquals("  digraph G {\n  }\n", $graph->render(1, "  "), "Render empty graph with indent and spaces");
 
         $mock = $this->getMock('Alom\Graphviz\Digraph\InstructionInterface', array('render'));
 
@@ -37,7 +37,7 @@ class DigraphTest extends \PHPUnit_Framework_TestCase
 
         $graph->append($mock);
 
-        $this->assertEquals("  digraph G {\n    foobarbaz;\n  };\n", $graph->render(1, "  "), "Render with statements");
+        $this->assertEquals("  digraph G {\n    foobarbaz;\n  }\n", $graph->render(1, "  "), "Render with statements");
     }
 
     public function testFluidInterfaceShort()
@@ -130,6 +130,6 @@ class DigraphTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('foo', $subgraph->getId(), "Subgraph identifier");
         $this->assertSame($graph, $subgraph->end(), "Subgraph end");
 
-        $this->assertEquals("subgraph foo {\n    A -> B;\n};\n", $subgraph->render(), "Subgraph rendering");
+        $this->assertEquals("subgraph foo {\n    A -> B;\n}\n", $subgraph->render(), "Subgraph rendering");
     }
 }
