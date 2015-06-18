@@ -1,6 +1,6 @@
 {
-  "name": "alom/graphviz",
-  "description": "Graphviz generation for PHP",
+  "name": "Esysteme/graphviz",
+  "description": "Graphviz generation for PHP, Patched for Glial",
   "keywords": ["dot", "graphviz"],
   "homepage": "http://github.com/alexandresalome/graphviz",
   "type": "library",
