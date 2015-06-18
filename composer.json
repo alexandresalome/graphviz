@@ -1,5 +1,5 @@
 {
-  "name": "Esysteme/graphviz",
+  "name": "esysteme/graphviz",
   "description": "Graphviz generation for PHP, Patched for Glial",
   "keywords": ["dot", "graphviz"],
   "homepage": "http://github.com/alexandresalome/graphviz",
