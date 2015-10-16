@@ -40,7 +40,10 @@ abstract class BaseInstruction implements InstructionInterface
      */
     protected function escape($value)
     {
-        return ($this->needsEscaping($value)) ? '"' . str_replace('"', '""', str_replace('\\', '\\\\', $value)) . '"' : $value;
+        if ($value[0] === chr(1))
+            return substr($value, 1);
+        else
+            return ($this->needsEscaping($value)) ? '"' . str_replace('"', '""', str_replace('\\', '\\\\', $value)) . '"' : $value;
     }
 
     protected function escapePath(array $path)
