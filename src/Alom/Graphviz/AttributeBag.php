@@ -26,6 +26,17 @@ class AttributeBag extends BaseInstruction
      */
     public function __construct(array $attributes = array())
     {
+        if (isset($attributes['_escaped'])) {
+            $escaped = $attributes['_escaped'];
+            unset($attributes['_escaped']);
+        } else {
+            $escaped = true;
+        }
+
+        if (!$escaped && isset($attributes['label'])) {
+            $attributes['label'] = new RawText($attributes['label']);
+        }
+
         $this->attributes = $attributes;
     }
 

@@ -28,7 +28,13 @@ abstract class BaseInstruction implements InstructionInterface
      */
     protected function renderInlineAssignment($name, $value)
     {
-        return $this->escape($name) . '=' . $this->escape($value);
+        if ($value instanceof RawText) {
+            $value = $value->getText();
+        } else {
+            $value = $this->escape($value);
+        }
+
+        return $this->escape($name).'='.$value;
     }
 
     /**

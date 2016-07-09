@@ -18,6 +18,18 @@ use Alom\Graphviz\Subgraph;
 
 class DigraphTest extends \PHPUnit_Framework_TestCase
 {
+    public function testRawText()
+    {
+        $graph = new Digraph('G');
+        $node = $graph->beginNode('foo', array(
+            'label' => '<bar<BR>baz>',
+            '_escaped' => false
+        ));
+
+        $this->assertInstanceOf('Alom\Graphviz\RawText', $node->getAttributes()->get('label'));
+        $this->assertEquals("digraph G {\n    foo [label=<bar<BR>baz>];\n}\n", $graph->render());
+    }
+
     public function testRender()
     {
         $graph = new Digraph('G');
