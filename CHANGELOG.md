@@ -1,6 +1,6 @@
 # CHANGLOG
 
-## 1.1.0 (under development)
+## 1.1.0 (12/07/2016)
 
 * [feature] Add methods hasEdge/getEdge on graph (Alexandre Salomé)
 * [feature] Add methods getAttribute on node and edge (Alexandre Salomé)
