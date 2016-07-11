@@ -119,6 +119,56 @@ abstract class Graph extends BaseInstruction
     }
 
     /**
+     * Tests if the graph has an edge.
+     *
+     * @param (string|string[])[] a path
+     *
+     * @return boolean
+     */
+    public function hasEdge(array $edge)
+    {
+        try {
+            $this->getEdge($edge);
+
+            return true;
+        } catch (\InvalidArgumentException $e) {
+            return false;
+        }
+    }
+
+    /**
+     * Returns an edge by its path.
+     *
+     * @param (string|string[])[] a path
+     *
+     * @return Edge
+     *
+     * @throws InvalidArgumentException path not found
+     */
+    public function getEdge(array $edge)
+    {
+        foreach ($this->instructions as $instruction) {
+            if (!$instruction instanceof Edge) {
+                continue;
+            }
+
+            if ($instruction->getList() == $edge) {
+                return $instruction;
+            }
+        }
+
+        $label = implode(' -> ', array_map(function ($edge) {
+            if (is_string($edge)) {
+                return $edge;
+            }
+
+            return implode(':', $edge);
+        }, $edge));
+
+        throw new \InvalidArgumentException(sprintf('Found no edge "%s".', $label));
+    }
+
+    /**
      * Adds an assignment instruction.
      *
      * @param string $name  Name of the value to assign

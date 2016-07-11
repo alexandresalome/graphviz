@@ -63,6 +63,7 @@ $graph
         ->node('C')
         ->node('D')
     ->end()
+    ->edge(array('C', 'D'))
 ;
 ```
 
@@ -82,6 +83,33 @@ echo $node->getAttribute('label', 'no label'); # second argument is default valu
 # write a value
 $node->attribute('label', 'new label');
 ```
+
+On a graph, you can access or verify edge existence:
+
+```
+$graph->hasEdge(array('A', 'B'));
+$graph->getEdge(array('C', 'D'));
+```
+
+### Using cluster and record IDs
+
+If you create an edge from/to an ID inside a record, use an array instead of a string:
+
+```php
+$graph = new Alom\Graphviz\Digraph('G');
+$graph
+    ->node('A', array('shape' => 'record', 'label' => '{ <1> Part 1 | <2> Part 2}'))
+    ->node('B')
+    ->edge(array('B', array('A', '1')))
+;
+```
+
+As you can see in the example above, the edge is composed of two parts:
+
+* ``'B'``: a regular node
+* ``array('A', '1')``: targets the cell "1" inside the A node
+
+This method also work for **getEdge**, **hasEdge** and every edge-related method.
 
 ## Samples
 

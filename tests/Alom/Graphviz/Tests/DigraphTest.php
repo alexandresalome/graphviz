@@ -41,6 +41,40 @@ class DigraphTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function testGetEdge()
+    {
+        $graph = new Digraph('G');
+        $graph->edge(array('A', 'B'));
+        $graph->edge(array('B', array('C', '1')));
+
+        $edge = $graph->getEdge(array('A', 'B'));
+        $this->assertEquals(array('A', 'B'), $edge->getList());
+
+        $edge = $graph->getEdge(array('B', array('C', '1')));
+        $this->assertEquals(array('B', array('C', 1)), $edge->getList());
+    }
+
+    public function testGetEdge_notExisting()
+    {
+        $graph = new Digraph('G');
+        $graph->edge(array('A', 'B'));
+        $graph->edge(array('B', array('C', '1')));
+
+        try {
+            $edge = $graph->getEdge(array('A', 'C'));
+            $this->fail();
+        } catch (\InvalidArgumentException $e) {
+            $this->assertEquals('Found no edge "A -> C".', $e->getMessage());
+        }
+
+        try {
+            $edge = $graph->getEdge(array('A', array('C', '2')));
+            $this->fail();
+        } catch (\InvalidArgumentException $e) {
+            $this->assertEquals('Found no edge "A -> C:2".', $e->getMessage());
+        }
+    }
+
     public function testRawText()
     {
         $graph = new Digraph('G');
