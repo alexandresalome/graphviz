@@ -2,6 +2,8 @@
 
 ## 1.1.0 (under development)
 
+* [feature] Add methods getAttribute on node and edge (Alexandre Salomé)
+* [feature] Add method get($id) on graph to get a subgraph or a node (Alexandre Salomé)
 * [feature] Disable label escaping (Alexandre Salomé)
 
 ## 1.0.1 (21/05/2014)

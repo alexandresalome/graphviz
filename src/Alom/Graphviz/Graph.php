@@ -73,11 +73,11 @@ abstract class Graph extends BaseInstruction
     /**
      * Adds a new instruction to graph.
      *
-     * @param BaseInstruction $instruction Instruction to add
+     * @param InstructionInterface $instruction Instruction to add
      *
      * @return Graph Fluid-interface
      */
-    public function append($instruction)
+    public function append(InstructionInterface $instruction)
     {
         $this->instructions[] = $instruction;
 
@@ -92,6 +92,30 @@ abstract class Graph extends BaseInstruction
     public function getInstructions()
     {
         return $this->instructions;
+    }
+
+    /**
+     * Returns a node or a subgraph, given his id.
+     *
+     * @param string $id the identifier of the node/graph to fetch
+     *
+     * @return Node|Graph
+     *
+     * @throws InvalidArgumentException node or graph not found
+     */
+    public function get($id)
+    {
+        foreach ($this->instructions as $instruction) {
+            if (!$instruction instanceof Node && !$instruction instanceof Subgraph) {
+                continue;
+            }
+
+            if ($instruction->getId() == $id) {
+                return $instruction;
+            }
+        }
+
+        throw new \InvalidArgumentException(sprintf('Found no node or graph with id "%s" in "%s".', $id, $this->id));
     }
 
     /**

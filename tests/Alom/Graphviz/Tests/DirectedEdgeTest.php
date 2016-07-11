@@ -30,4 +30,16 @@ class DirectedEdgeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals("A -> B;\n", $edge->render());
     }
+
+    public function testAttributes()
+    {
+        $edge = new DirectedEdge(array('A', 'B'), array('foo' => 'bar'));
+
+        $this->assertEquals('bar', $edge->getAttribute('foo'));
+        $this->assertEquals('foo', $edge->getAttribute('not-existing', 'foo'));
+
+        $edge->attribute('bar', 'baz');
+
+        $this->assertEquals('baz', $edge->getAttribute('bar'));
+    }
 }

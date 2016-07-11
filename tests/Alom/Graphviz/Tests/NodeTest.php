@@ -19,4 +19,16 @@ class NodeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals("A;\n", $node->render(), "Render basic");
     }
+
+    public function testAttributes()
+    {
+        $node = new Node('A', array('foo' => 'bar'));
+
+        $this->assertEquals('bar', $node->getAttribute('foo'));
+        $this->assertEquals('foo', $node->getAttribute('not-existing', 'foo'));
+
+        $node->attribute('bar', 'baz');
+
+        $this->assertEquals('baz', $node->getAttribute('bar'));
+    }
 }

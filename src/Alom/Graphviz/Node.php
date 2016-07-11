@@ -60,6 +60,17 @@ class Node extends BaseInstruction
     }
 
     /**
+     * Returns the value of an attribute of the node.
+     *
+     * @param string $name name of the attribute
+     * @param mixed $default default value if the attribute does not exist
+     */
+    public function getAttribute($name, $default = null)
+    {
+        return $this->attributes->get($name, $default);
+    }
+
+    /**
      * Sets an attribute of node.
      *
      * @param string $name  Name of the attribute to set

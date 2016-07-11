@@ -18,6 +18,29 @@ use Alom\Graphviz\Subgraph;
 
 class DigraphTest extends \PHPUnit_Framework_TestCase
 {
+    public function testGet()
+    {
+        $graph = new Digraph('G');
+        $graph->subgraph('foo')
+            ->node('bar', array('label' => 'baz'))
+        ;
+
+        $this->assertEquals('baz', $graph->get('foo')->get('bar')->getAttribute('label'));
+    }
+
+    public function testGet_NotExisting()
+    {
+        $graph = new Digraph('G');
+        $graph->node('foo');
+
+        try {
+            $graph->get('bar');
+            $this->fail();
+        } catch (\InvalidArgumentException $e) {
+            // ok
+        }
+    }
+
     public function testRawText()
     {
         $graph = new Digraph('G');
@@ -38,7 +61,7 @@ class DigraphTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("    digraph G {\n    }\n", $graph->render(1), "Render empty graph with indent");
         $this->assertEquals("  digraph G {\n  }\n", $graph->render(1, "  "), "Render empty graph with indent and spaces");
 
-        $mock = $this->getMock('Alom\Graphviz\Digraph\InstructionInterface', array('render'));
+        $mock = $this->getMock('Alom\Graphviz\InstructionInterface', array('render'));
 
         $mock
             ->expects($this->once())

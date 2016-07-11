@@ -48,6 +48,41 @@ $graph
     ))
 ```
 
+### Browsing the graph
+
+When you have created lot of subgraphs and nodes, it might be useful to be able to browse it using identifiers. For example, if you have the following graph:
+
+```php
+$graph = new Alom\Graphviz\Digraph('G');
+$graph
+    ->subgraph('cluster_1')
+        ->node('A')
+        ->node('B')
+    ->end()
+    ->subgraph('cluster_2')
+        ->node('C')
+        ->node('D')
+    ->end()
+;
+```
+
+You can do the following to access the nodes in the existing graph:
+
+```php
+$cluster = $graph->get('cluster_1');
+$node = $graph->get('cluster_2')->get('D');
+```
+
+When you have a node or an edge, you can manipulate its attributes:
+
+```php
+# read a value
+echo $node->getAttribute('label', 'no label'); # second argument is default value
+
+# write a value
+$node->attribute('label', 'new label');
+```
+
 ## Samples
 
 Take a look at examples located in **samples** folder:

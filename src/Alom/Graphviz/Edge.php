@@ -57,6 +57,17 @@ abstract class Edge extends BaseInstruction
     }
 
     /**
+     * Returns the value of an attribute of the edge.
+     *
+     * @param string $name name of the attribute
+     * @param mixed $default default value if the attribute does not exist
+     */
+    public function getAttribute($name, $default = null)
+    {
+        return $this->attributes->get($name, $default);
+    }
+
+    /**
      * Sets an attribute.
      *
      * @param string $name  Name of the attribute to set
