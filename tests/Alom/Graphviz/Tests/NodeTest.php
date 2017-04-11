@@ -31,4 +31,10 @@ class NodeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('baz', $node->getAttribute('bar'));
     }
+
+    public function testRenderEscaped()
+    {
+        $node = new Node('Edge');
+        $this->assertEquals("\"Edge\";\n", $node->render(), 'Reserved keyword "Edge" escaped');
+    }
 }
