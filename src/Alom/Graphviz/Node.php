@@ -75,11 +75,15 @@ class Node extends BaseInstruction
      *
      * @param string $name  Name of the attribute to set
      * @param string $value Value to set
+     * @param bool $escape
      *
      * @return \Alom\Graphviz\Node
      */
-    public function attribute($name, $value)
+    public function attribute($name, $value, $escape = true)
     {
+        if (!$escape)
+            $value = chr(1) . $value;
+        
         $this->attributes->set($name, $value);
 
         return $this;
