@@ -27,7 +27,7 @@ class Subgraph extends Graph
                 return new DirectedEdge($list, $attributes, $parent);
             }
 
-            $currentParent = $parent->end();
+            $currentParent = $currentParent->end();
         }
 
         throw new \LogicException('Unable to find edge type');
