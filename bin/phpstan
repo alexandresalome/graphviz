@@ -1,0 +1,14 @@
+#!/bin/bash
+set -euo pipefail
+cd "`dirname "$0"`"
+
+if [ ! -d tools/phpstan ]; then
+    rm -rf tools/phpstan.tmp
+    mkdir --parents tools/phpstan.tmp
+    composer require --working-dir=tools/phpstan.tmp phpstan/phpstan
+    mv tools/phpstan{.tmp,}
+fi
+
+cd ..
+
+exec bin/tools/phpstan/vendor/bin/phpstan $*

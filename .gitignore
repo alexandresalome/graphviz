@@ -1,2 +1,8 @@
+/bin/tools
+/build
+/docs/**/_gifs
 /vendor
+/venv
 composer.lock
+.phpunit.result.cache
+.php-cs-fixer.cache

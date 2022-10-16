@@ -2,25 +2,38 @@
   "name": "alom/graphviz",
   "description": "Graphviz generation for PHP",
   "keywords": ["dot", "graphviz"],
-  "homepage": "http://github.com/alexandresalome/graphviz",
+  "homepage": "https://github.com/alexandresalome/graphviz",
   "type": "library",
   "license": "MIT",
   "authors": [
     {
       "name": "Alexandre Salomé",
-      "email": "alexandre.salome@gmail.com",
-      "homepage": "http://alexandre-salome.fr"
+      "email": "graphviz@pub.salome.fr",
+      "homepage": "https://alexandre.salome.fr"
     }
   ],
+
+  "autoload": {
+    "psr-4": {
+      "Graphviz\\": "src/"
+    }
+  },
+
+  "autoload-dev": {
+    "psr-4": {
+      "Graphviz\\Dev\\": "src_dev/",
+      "Graphviz\\Tests\\": "tests/"
+    }
+  },
+
   "require": {
-    "php": ">=5.3.0"
+    "php": ">=8.0,<9.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "3.7.*"
-  },
-  "autoload": {
-    "psr-0": {
-      "Alom": "src/"
-    }
+    "ext-dom": "*",
+    "phpunit/phpunit": "^9.5",
+    "symfony/process": "^5.4|^6.1",
+    "symfony/finder": "^5.4|^6.1",
+    "symfony/var-dumper": "^5.4|^6.1"
   }
 }

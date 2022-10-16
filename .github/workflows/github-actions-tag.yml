@@ -1,0 +1,28 @@
+name: PHP Graphviz release
+run-name: Releasing PHP Graphviz 🚀
+on:
+    push:
+        tags:
+            - v2.*
+jobs:
+    doc_release:
+        name: Documentation - Release
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+            - name: Install PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: 8.1
+            - uses: actions/setup-python@v2
+              with:
+                  python-version: 3.x
+            - name: Install dependencies
+              run: pip install -r requirements.txt
+            - name: Install dot
+              run: sudo apt-get install -y graphviz
+            - name: Build the documentation images
+              run: make render-images
+            - name: Build the documentation in strict mode
+              run: mkdocs gh-deploy --force --strict
