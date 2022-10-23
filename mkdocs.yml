@@ -1,0 +1,23 @@
+site_name: PHP Graphviz
+repo_url: https://github.com/alexandresalome/graphviz/
+
+docs_dir: docs
+site_dir: build/doc
+
+theme: readthedocs
+
+nav:
+    - index.md
+    - getting-started.md
+    - Usage:
+          - usage/creation.md
+          - usage/attributes.md
+          - usage/nodes.md
+          - usage/edges.md
+          - usage/rendering.md
+    - Graphviz:
+          - graphviz/subgraph.md
+    - Examples:
+          - examples/basic.md
+          - examples/subgraph.md
+          - examples/table.md

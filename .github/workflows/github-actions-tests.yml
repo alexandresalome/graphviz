@@ -1,0 +1,48 @@
+name: PHP Graphviz tests
+run-name: Testing PHP Graphviz 🤔
+on:
+    pull_request:
+    push:
+        branches: ['main']
+jobs:
+    php_tests:
+        name: PHP ${{ matrix.php-versions }} - Tests
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                php-versions: ['8.0', '8.1']
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            - name: Install PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php-versions }}
+            - name: PHPUnit
+              run: make phpunit
+            - name: PHP-CS-Fixer
+              run: make php-cs-fixer
+            - name: PHPStan
+              run: make phpstan
+    doc_tests:
+        name: Documentation - Tests
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            - name: Install PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: 8.1
+                  extensions: dom, xdebug
+            - uses: actions/setup-python@v2
+              with:
+                  python-version: 3.x
+            - name: Install dependencies
+              run: pip install -r requirements.txt
+            - name: Install dot
+              run: sudo apt-get install -y graphviz
+            - name: Build the documentation images
+              run: make render-images
+            - name: Build the documentation in strict mode
+              run: mkdocs build --strict

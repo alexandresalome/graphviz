@@ -1,0 +1,14 @@
+#!/bin/bash
+set -euo pipefail
+cd "`dirname "$0"`"
+
+if [ ! -d tools/php-cs-fixer ]; then
+    rm -rf tools/php-cs-fixer.tmp
+    mkdir --parents tools/php-cs-fixer.tmp
+    composer require --working-dir=tools/php-cs-fixer.tmp friendsofphp/php-cs-fixer
+    mv tools/php-cs-fixer{.tmp,}
+fi
+
+cd ..
+
+exec bin/tools/php-cs-fixer/vendor/bin/php-cs-fixer $*
