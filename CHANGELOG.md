@@ -1,8 +1,8 @@
 CHANGELOG
 =========
 
-2.0.0 (in progress)
--------------------
+2.0.0 (23/10/2022)
+------------------
 
 * [feature] Add a ``nodes`` method on graph objects
 * [feature] Strict typing
