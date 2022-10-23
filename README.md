@@ -1,6 +1,7 @@
-# Graphviz
+PHP Graphviz
+============
 
-![Build status](https://github.com/github/docs/actions/workflows/github-actions-tests.yml/badge.svg)
+![PHP Graphviz tests](https://github.com/alexandresalome/graphviz/actions/workflows/github-actions-tests.yml/badge.svg)
 ![Latest Stable Version](https://poser.pugx.org/alom/graphviz/v/stable)
 ![Total Downloads](https://poser.pugx.org/alom/graphviz/downloads)
 ![License](https://poser.pugx.org/alom/graphviz/license)
@@ -9,6 +10,6 @@
 
 Graphviz's generation for PHP.
 
-* [Documentation](CONTRIBUTORS.md)
+* [Documentation](https://alexandresalome.github.io/graphviz/)
 * [Changelog](CHANGELOG.md)
 * [Contributors](CONTRIBUTORS.md)
