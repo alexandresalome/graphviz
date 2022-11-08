@@ -242,7 +242,39 @@ class AbstractGraphTest extends TestCase
         $this->assertSame('foo', $subgraph->getId(), 'Subgraph identifier');
         $this->assertSame($graph, $subgraph->end(), 'Subgraph end');
 
-        $this->assertSame("subgraph foo {\n    A -> B;\n}\n", $subgraph->render(), 'Subgraph rendering');
+        $this->assertSame("subgraph foo {\n    A -> B;\n}\n", $subgraph->render());
+    }
+
+    public function testCommentLine(): void
+    {
+        $graph = new TestGraph();
+        $subgraph = $graph->subgraph('foo');
+        $subgraph->commentLine('Foo');
+        $this->assertSame("subgraph foo {\n    // Foo\n}\n", $subgraph->render());
+    }
+
+    public function testCommentLineMultiple(): void
+    {
+        $graph = new TestGraph();
+        $subgraph = $graph->subgraph('foo');
+        $subgraph->commentLine("Foo\nBar");
+        $this->assertSame("subgraph foo {\n    // Foo\n    // Bar\n}\n", $subgraph->render());
+    }
+
+    public function testCommentLineNoSpace(): void
+    {
+        $graph = new TestGraph();
+        $subgraph = $graph->subgraph('foo');
+        $subgraph->commentLine('Foo', false);
+        $this->assertSame("subgraph foo {\n    //Foo\n}\n", $subgraph->render());
+    }
+
+    public function testCommentLineCppStyle(): void
+    {
+        $graph = new TestGraph();
+        $subgraph = $graph->subgraph('foo');
+        $subgraph->commentLine('Foo', true, true);
+        $this->assertSame("subgraph foo {\n    # Foo\n}\n", $subgraph->render());
     }
 }
 

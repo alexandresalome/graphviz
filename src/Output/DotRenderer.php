@@ -13,6 +13,7 @@ use Graphviz\AbstractGraph;
 use Graphviz\Assign;
 use Graphviz\AttributeBag;
 use Graphviz\AttributeSet;
+use Graphviz\Comment;
 use Graphviz\Digraph;
 use Graphviz\Edge;
 use Graphviz\Graph;
@@ -159,6 +160,15 @@ class DotRenderer implements RendererInterface
         ;
     }
 
+    public function renderComment(Comment $comment, int $indent = 0): string
+    {
+        return
+            str_repeat($this->indentSpacer, $indent).
+            $comment->getContent().
+            "\n"
+        ;
+    }
+
     public function renderInstruction(InstructionInterface $instruction, int $indent = 0): string
     {
         if ($instruction instanceof Assign) {
@@ -175,6 +185,10 @@ class DotRenderer implements RendererInterface
 
         if ($instruction instanceof Edge) {
             return $this->renderEdge($instruction, $indent);
+        }
+
+        if ($instruction instanceof Comment) {
+            return $this->renderComment($instruction, $indent);
         }
 
         if ($instruction instanceof AbstractGraph) {

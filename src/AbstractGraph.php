@@ -215,7 +215,7 @@ abstract class AbstractGraph implements InstructionInterface
     }
 
     /**
-     * Created a new edge on graph.
+     * Creates a new edge on graph.
      *
      * @param array<string|array<string>>               $list       List of edges
      * @param array<string,string|RawText>|AttributeBag $attributes Attributes to set on edge
@@ -223,6 +223,29 @@ abstract class AbstractGraph implements InstructionInterface
     public function beginEdge(array $list, array|AttributeBag $attributes = []): Edge
     {
         return $this->instructions[] = new Edge($this, $list, $attributes);
+    }
+
+    /**
+     * Adds a new comment line to the graph (starting with //, or #).
+     *
+     * If you pass a multiline string to this method, it will append multiple
+     * comment lines.
+     *
+     * @param string $comment   The comment to add
+     * @param bool   $withSpace Adds a space at the beginning of the list
+     * @param bool   $cppStyle  Indicates if it's a classic (//) or C++ style (#)
+     *
+     * @return $this Fluid interface
+     */
+    public function commentLine(string $comment, bool $withSpace = true, bool $cppStyle = false): self
+    {
+        $space = $withSpace ? ' ' : '';
+        $prefix = $cppStyle ? '#' : '//';
+        foreach (explode("\n", $comment) as $line) {
+            $this->instructions[] = new Comment($prefix.$space.$line);
+        }
+
+        return $this;
     }
 
     /**

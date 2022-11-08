@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+2.1.0 (In development)
+----------------------
+
+* [feature] Add a ``commentLine`` method on graph objects
+
 2.0.0 (23/10/2022)
 ------------------
 

@@ -14,6 +14,7 @@ nav:
           - usage/attributes.md
           - usage/nodes.md
           - usage/edges.md
+          - usage/comment.md
           - usage/rendering.md
     - Graphviz:
           - graphviz/subgraph.md
