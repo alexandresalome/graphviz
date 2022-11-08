@@ -36,6 +36,10 @@ phpunit: vendor ## Runs PHPUnit tests and coverage test
 	@XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-clover build/coverage_clover.xml
 	@php bin/coverage-checker.php build/coverage_clover.xml
 
+.PHONY: phpunit-coverage
+phpunit-coverage: vendor ## Runs PHPUnit tests and coverage HTML report
+	@XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html build/coverage_html
+
 .PHONY: php-cs-fixer-diff
 php-cs-fixer: ## Runs PHP-CS-Fixer tests
 	@bin/php-cs-fixer fix --config .php-cs-fixer.dist.php --dry-run --diff src tests
