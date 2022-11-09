@@ -177,4 +177,11 @@ class DotRendererTest extends TestCase
         $comment = new Comment('// Foo');
         $this->assertSame("// Foo\n", $this->renderer->renderInstruction($comment));
     }
+
+    public function testRenderCommentBlock(): void
+    {
+        $comment = new Comment("/*\n * Foo\n */");
+        $this->assertSame("/*\n * Foo\n */\n", $this->renderer->renderInstruction($comment));
+        $this->assertSame("    /*\n     * Foo\n     */\n", $this->renderer->renderInstruction($comment, 1));
+    }
 }

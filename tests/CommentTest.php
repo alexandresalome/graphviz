@@ -22,4 +22,12 @@ class CommentTest extends TestCase
         $comment = new Comment('// foo');
         $this->assertSame('// foo', $comment->getContent());
     }
+
+    public function testIsIndented(): void
+    {
+        $comment = new Comment('// foo');
+        $this->assertTrue($comment->isIndented());
+        $comment = new Comment('// foo', false);
+        $this->assertFalse($comment->isIndented());
+    }
 }

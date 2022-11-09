@@ -162,9 +162,12 @@ class DotRenderer implements RendererInterface
 
     public function renderComment(Comment $comment, int $indent = 0): string
     {
+        $prefix = str_repeat($this->indentSpacer, $indent);
+        $indentSpace = $comment->isIndented() ? $prefix : '';
+
         return
-            str_repeat($this->indentSpacer, $indent).
-            $comment->getContent().
+            $prefix.
+            str_replace("\n", "\n".$indentSpace, $comment->getContent()).
             "\n"
         ;
     }

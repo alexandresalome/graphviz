@@ -276,6 +276,30 @@ class AbstractGraphTest extends TestCase
         $subgraph->commentLine('Foo', true, true);
         $this->assertSame("subgraph foo {\n    # Foo\n}\n", $subgraph->render());
     }
+
+    public function testCommentBlock(): void
+    {
+        $graph = new TestGraph();
+        $subgraph = $graph->subgraph('foo');
+        $subgraph->commentBlock('Foo');
+        $this->assertSame("subgraph foo {\n    /*\n     * Foo\n     */\n}\n", $subgraph->render());
+    }
+
+    public function testCommentBlockMultiline(): void
+    {
+        $graph = new TestGraph();
+        $subgraph = $graph->subgraph('foo');
+        $subgraph->commentBlock("Foo\nBar");
+        $this->assertSame("subgraph foo {\n    /*\n     * Foo\n     * Bar\n     */\n}\n", $subgraph->render());
+    }
+
+    public function testCommentBlockNoSpace(): void
+    {
+        $graph = new TestGraph();
+        $subgraph = $graph->subgraph('foo');
+        $subgraph->commentBlock("Foo\nBar", false);
+        $this->assertSame("subgraph foo {\n    /*Foo\nBar*/\n}\n", $subgraph->render());
+    }
 }
 
 class TestGraph extends AbstractGraph

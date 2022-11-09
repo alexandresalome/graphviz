@@ -48,7 +48,8 @@ echo $graph->render();
 # }
 ```
 
-And for C++ style arguments (``#`` instead of ``//``), pass ``true`` as a third argument:
+And for C++ style arguments (``#`` instead of ``//``), pass ``true`` as a third
+argument:
 
 ```php
 $graph = new Graphviz\Digraph();
@@ -57,5 +58,53 @@ echo $graph->render();
 
 # digraph G {
 #     # C++ style
+# }
+```
+
+### Block comments
+
+You can add block comments by using the ``commentBlock`` function:
+
+```php
+$graph = new Graphviz\Digraph();
+$graph->commentBlock('My block comment');
+echo $graph->render();
+
+# digraph G {
+#     /*
+#      * My block comment
+#      */
+# }
+```
+
+Multiple lines is also supported:
+
+```php
+$graph = new Graphviz\Digraph();
+$graph->commentBlock("My block comment\non multiple lines");
+echo $graph->render();
+
+# digraph G {
+#     /*
+#      * My block comment
+#      * on multiple lines
+#      */
+# }
+```
+
+
+
+You can disable new lines and spacing and new line indent by providing ``false``
+as a second  argument:
+
+```php
+$graph = new Graphviz\Digraph();
+$graph->commentBlock("** ASCII fan\nNew line\n**', false);
+echo $graph->render();
+
+# digraph G {
+#     /*** ASCII fan
+# New line\n
+# ***/
 # }
 ```
