@@ -99,7 +99,7 @@ as a second  argument:
 
 ```php
 $graph = new Graphviz\Digraph();
-$graph->commentBlock("** ASCII fan\nNew line\n**', false);
+$graph->commentBlock("** ASCII fan\nNew line\n**", false);
 echo $graph->render();
 
 # digraph G {

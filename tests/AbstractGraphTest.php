@@ -14,6 +14,7 @@ use Graphviz\Assign;
 use Graphviz\AttributeSet;
 use Graphviz\Edge;
 use Graphviz\Node;
+use Graphviz\Subgraph;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -28,7 +29,13 @@ class AbstractGraphTest extends TestCase
             ->node('bar', ['label' => 'baz'])
         ;
 
-        $this->assertSame('baz', $graph->get('foo')->get('bar')->getAttribute('label'));
+        $foo = $graph->get('foo');
+        $this->assertInstanceOf(Subgraph::class, $foo);
+
+        $bar = $foo->get('bar');
+        $this->assertInstanceOf(Node::class, $bar);
+
+        $this->assertSame('baz', $bar->getAttribute('label'));
     }
 
     public function testGetNotExisting(): void
@@ -89,23 +96,19 @@ class AbstractGraphTest extends TestCase
 
         $this->assertCount(4, $instructions = $graph->getInstructions());
 
-        /** @var Assign $assign */
         $assign = $instructions[0];
         $this->assertInstanceOf(Assign::class, $assign);
         $this->assertSame('rankdir', $assign->getName());
         $this->assertSame('LR', $assign->getValue());
 
-        /** @var Node $node */
         $node = $instructions[1];
         $this->assertInstanceOf(Node::class, $node);
         $this->assertSame('A', $node->getId());
 
-        /** @var Node $node */
         $node = $instructions[2];
         $this->assertInstanceOf(Node::class, $node);
         $this->assertSame('B', $node->getId());
 
-        /** @var Edge $edge */
         $edge = $instructions[3];
         $this->assertInstanceOf(Edge::class, $edge);
         $this->assertSame(['A', 'B'], $edge->getPath());
@@ -184,13 +187,11 @@ class AbstractGraphTest extends TestCase
 
         $this->assertCount(2, $instructions = $graph->getInstructions());
 
-        /** @var Node $node */
         $node = $instructions[0];
         $this->assertInstanceOf(Node::class, $node);
         $this->assertSame('A', $node->getId());
         $this->assertSame('red', $node->getAttributeBag()->get('color'));
 
-        /** @var Edge $edge */
         $edge = $instructions[1];
         $this->assertInstanceOf(Edge::class, $edge);
         $this->assertSame(['A', 'B'], $edge->getPath());
@@ -203,7 +204,6 @@ class AbstractGraphTest extends TestCase
         $graph->attr('node', ['color' => 'blue']);
 
         $this->assertCount(1, $instructions = $graph->getInstructions());
-        /** @var AttributeSet $attributeSet */
         $attributeSet = $instructions[0];
         $this->assertInstanceOf(AttributeSet::class, $attributeSet);
         $this->assertSame('node', $attributeSet->getName());

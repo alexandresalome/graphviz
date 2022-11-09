@@ -131,10 +131,10 @@ abstract class AbstractGraph implements InstructionInterface
     /**
      * Define attributes for node/edge/graph.
      *
-     * @param string                                     $name       Name of type
-     * @param array<string, string|RawText>|AttributeBag $attributes Attributes of the type
+     * @param string                        $name       Name of type
+     * @param array<string, string|RawText> $attributes Attributes of the type
      */
-    public function attr(string $name, array|AttributeBag $attributes): self
+    public function attr(string $name, array $attributes): self
     {
         $this->instructions[] = new AttributeSet($name, $attributes);
 
@@ -154,12 +154,12 @@ abstract class AbstractGraph implements InstructionInterface
     /**
      * Created a new node on graph.
      *
-     * @param string                                     $id         Identifier of node
-     * @param array<string, string|RawText>|AttributeBag $attributes Attributes to set on node
+     * @param string                        $id         Identifier of node
+     * @param array<string, string|RawText> $attributes Attributes to set on node
      *
      * @return self Fluid-interface
      */
-    public function node(string $id, array|AttributeBag $attributes = []): self
+    public function node(string $id, array $attributes = []): self
     {
         $this->instructions[] = new Node($this, $id, $attributes);
 
@@ -191,10 +191,10 @@ abstract class AbstractGraph implements InstructionInterface
     /**
      * Created a new node on graph.
      *
-     * @param string                                     $id         Identifier of node
-     * @param array<string, string|RawText>|AttributeBag $attributes Attributes to set on node
+     * @param string                        $id         Identifier of node
+     * @param array<string, string|RawText> $attributes Attributes to set on node
      */
-    public function beginNode(string $id, array|AttributeBag $attributes = []): Node
+    public function beginNode(string $id, array $attributes = []): Node
     {
         return $this->instructions[] = new Node($this, $id, $attributes);
     }
@@ -202,12 +202,12 @@ abstract class AbstractGraph implements InstructionInterface
     /**
      * Created a new edge on graph.
      *
-     * @param array<string|array<string>>                $list       List of edges
-     * @param array<string, string|RawText>|AttributeBag $attributes Attributes to set on edge
+     * @param array<string|array<string>>   $list       List of edges
+     * @param array<string, string|RawText> $attributes Attributes to set on edge
      *
      * @return self Fluid-interface
      */
-    public function edge(array $list, array|AttributeBag $attributes = []): self
+    public function edge(array $list, array $attributes = []): self
     {
         $this->beginEdge($list, $attributes);
 
@@ -217,10 +217,10 @@ abstract class AbstractGraph implements InstructionInterface
     /**
      * Creates a new edge on graph.
      *
-     * @param array<string|array<string>>               $list       List of edges
-     * @param array<string,string|RawText>|AttributeBag $attributes Attributes to set on edge
+     * @param array<string|array<string>>  $list       List of edges
+     * @param array<string,string|RawText> $attributes Attributes to set on edge
      */
-    public function beginEdge(array $list, array|AttributeBag $attributes = []): Edge
+    public function beginEdge(array $list, array $attributes = []): Edge
     {
         return $this->instructions[] = new Edge($this, $list, $attributes);
     }

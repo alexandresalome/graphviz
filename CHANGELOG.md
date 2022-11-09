@@ -5,6 +5,8 @@ CHANGELOG
 ----------------------
 
 * [feature] Add a ``commentLine`` method on graph objects
+* [feature] Add a ``commentBlock`` method on graph objects
+* [bug] Fix method parameters typing for edges and attributes
 
 2.0.0 (23/10/2022)
 ------------------

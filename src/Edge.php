@@ -24,7 +24,7 @@ class Edge implements InstructionInterface
     /**
      * List of element identifiers.
      *
-     * @var string[]
+     * @var array<string|array<string>>
      */
     protected array $list;
 
@@ -36,9 +36,9 @@ class Edge implements InstructionInterface
     /**
      * Creates an edge.
      *
-     * @param string[]                      $list       List of edges
-     * @param array<string, string|RawText> $attributes Associative array of attributes
      * @param AbstractGraph                 $parent     Parent instruction
+     * @param array<string|array<string>>   $list       List of edges
+     * @param array<string, string|RawText> $attributes Associative array of attributes
      */
     public function __construct(AbstractGraph $parent, array $list, array $attributes = [])
     {
@@ -50,7 +50,7 @@ class Edge implements InstructionInterface
     /**
      * Returns list of elements composing the edge.
      *
-     * @return string[]
+     * @return array<string|array<string>>
      */
     public function getPath(): array
     {
