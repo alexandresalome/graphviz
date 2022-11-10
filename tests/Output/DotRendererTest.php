@@ -6,6 +6,7 @@ use Graphviz\AbstractGraph;
 use Graphviz\Assign;
 use Graphviz\AttributeBag;
 use Graphviz\AttributeSet;
+use Graphviz\Comment;
 use Graphviz\Digraph;
 use Graphviz\Edge;
 use Graphviz\Graph;
@@ -169,5 +170,18 @@ class DotRendererTest extends TestCase
     {
         $node = new Node(new Graph(), 'A');
         $this->assertSame("A;\n", $this->renderer->renderNode($node));
+    }
+
+    public function testRenderCommentLine(): void
+    {
+        $comment = new Comment('// Foo');
+        $this->assertSame("// Foo\n", $this->renderer->renderInstruction($comment));
+    }
+
+    public function testRenderCommentBlock(): void
+    {
+        $comment = new Comment("/*\n * Foo\n */");
+        $this->assertSame("/*\n * Foo\n */\n", $this->renderer->renderInstruction($comment));
+        $this->assertSame("    /*\n     * Foo\n     */\n", $this->renderer->renderInstruction($comment, 1));
     }
 }

@@ -14,6 +14,7 @@ nav:
           - usage/attributes.md
           - usage/nodes.md
           - usage/edges.md
+          - usage/comment.md
           - usage/rendering.md
     - Graphviz:
           - graphviz/subgraph.md
@@ -21,3 +22,6 @@ nav:
           - examples/basic.md
           - examples/subgraph.md
           - examples/table.md
+    - About:
+          - changelog.md
+          - contributors.md

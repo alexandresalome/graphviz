@@ -38,6 +38,9 @@ class ImageRenderer
         $absolutePath = $this->documentationDirectory.'/'.$dirname.$relativePath;
         // File content
         $content = file_get_contents($file);
+        if (false === $content) {
+            throw new \RuntimeException(sprintf('Unable to read "%s".', $file));
+        }
         $lines = explode("\n", $content);
 
         echo "- $relative\n";
@@ -151,6 +154,9 @@ class ImageRenderer
     private function renderWithGraphviz(array $lines, string $absolutePngPath): void
     {
         $fileBase = tempnam(sys_get_temp_dir(), 'graphviz_');
+        if (false === $fileBase) {
+            throw new \RuntimeException(sprintf('Unable to create a temporary file in "%s".', sys_get_temp_dir()));
+        }
         unlink($fileBase);
         $phpFile = $fileBase.'.php';
 

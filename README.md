@@ -11,5 +11,5 @@ PHP Graphviz
 Graphviz's generation for PHP.
 
 * [Documentation](https://alexandresalome.github.io/graphviz/)
-* [Changelog](CHANGELOG.md)
-* [Contributors](CONTRIBUTORS.md)
+* [Changelog](docs/changelog.md)
+* [Contributors](docs/contributors.md)

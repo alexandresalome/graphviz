@@ -34,6 +34,7 @@
     "phpunit/phpunit": "^9.5",
     "symfony/process": "^5.4|^6.1",
     "symfony/finder": "^5.4|^6.1",
-    "symfony/var-dumper": "^5.4|^6.1"
+    "symfony/var-dumper": "^5.4|^6.1",
+    "phpstan/phpstan-phpunit": "^1.2"
   }
 }
