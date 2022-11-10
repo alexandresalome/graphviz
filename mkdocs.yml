@@ -22,3 +22,6 @@ nav:
           - examples/basic.md
           - examples/subgraph.md
           - examples/table.md
+    - About:
+          - changelog.md
+          - contributors.md
