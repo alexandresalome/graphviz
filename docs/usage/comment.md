@@ -5,6 +5,10 @@ title: Add comments
 Adding comments
 ===============
 
+<p style="padding: .2rem .5rem; border: 1px solid #8888ff; background-color: #ddeeff; color: #0033aa; font-weight: bold;">
+    Available from the version 2.1
+</p>
+
 Add comments into the graph
 ---------------------------
 
