@@ -49,6 +49,6 @@ class DotEscaper
             return true;
         }
 
-        return preg_match('/[{}<> "#\-:\\\\\\/.,]/', $value) || '' === $value;
+        return preg_match('/[\n{}<> "#\-:\\\\\\/.,]/', $value) || '' === $value;
     }
 }

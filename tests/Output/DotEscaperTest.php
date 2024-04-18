@@ -51,6 +51,7 @@ class DotEscaperTest extends TestCase
             ['edge', '"edge"'],
             ['', '""'],
             ['2', '2'],
+            ["foo\nbar", "\"foo\nbar\""],
         ];
     }
 
