@@ -8,6 +8,11 @@ CHANGELOG
 * [feature] Add a ``commentBlock`` method on graph objects
 * [bug] Fix method parameters typing for edges and attributes
 
+2.0.1 (2024-04-25)
+------------------
+
+* [bug] Escape text with newlines
+
 2.0.0 (23/10/2022)
 ------------------
 
